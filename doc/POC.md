@@ -1,40 +1,63 @@
-# AsciiArtify GitOps PoC з Argo CD
+# AsciiArtify GitOps PoC with Argo CD
 
-## Мета PoC
+## The purpose of PoC
 
-Мета цього Proof of Concept (PoC) – показати, що команда **AsciiArtify** може:
+The goal of this Proof of Concept (PoC) is to demonstrate that the **AsciiArtify** team can:
 
-- розгорнути локальний Kubernetes-кластер;
-- встановити та сконфігурувати систему GitOps **Argo CD**;
-- надати розробникам доступ до веб-інтерфейсу Argo CD;
-- підготувати середовище для подальшого розгортання MVP додатку AsciiArtify.
+- deploy a local Kubernetes cluster;
+- install and configure the **Argo CD** GitOps system;
+- provide developers with access to the Argo CD web interface;
+- prepare the environment for further deployment of the AsciiArtify MVP application.
 
-PoC виконується локально на машині розробника і не претендує на production-рівень, але відтворює базову GitOps-архітектуру.
-
----
-
-## Архітектура PoC
-
-- **Kubernetes-кластер**: локальний кластер на базі `k3d` (K3s у Docker).
-- **Git репозиторій**: `https://github.com/<username>/AsciiArtify`  
-  (цей репозиторій, гілка `main`).
-- **GitOps-система**: `Argo CD`, встановлена в namespace `argocd`.
-- **Доступ до UI Argo CD**: через `kubectl port-forward` або `https://localhost:8080`.
+The PoC is performed locally on the developer's machine and does not claim to be production-level, but it reproduces the basic GitOps architecture.
 
 ---
 
-## 1. Передумови
+## Architecture PoC
 
-На робочій машині мають бути встановлені:
+- **Kubernetes-cluster**: local cluster based on `k3d` (K3s in Docker).
+- **Git repository**: `https://github.com/<username>/AsciiArtify`.
+- **GitOps-system**: `Argo CD`, set in namespace `argocd`.
+- **Access to the Argo CD UI**: via `kubectl port-forward` or `https://localhost:8080`.
 
-- **Docker** (або сумісний runtime)  
+---
+
+## 1. Prerequisites
+
+The following must be installed on the work machine:
+
+- **Docker** (or compatible runtime)  
 - **k3d**  
 - **kubectl**
-- (опціонально) **Argo CD CLI** `argocd`
 
-Перевірка:
+
+Verification:
 
 ```bash
 docker version
 k3d version
 kubectl version --client
+```
+
+## 2. Argo CD installation process
+
+2.1 Create cluster:
+
+```bash
+k3d cluster create argocd
+```
+Verification of the created cluster:
+
+```bash
+kubectl cluster-info
+```
+
+2.2 Create namespace:
+
+```bash
+kubectl create namespace argocd
+```
+Verification:
+```bash
+kubectl get ns
+```
