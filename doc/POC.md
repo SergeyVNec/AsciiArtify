@@ -18,7 +18,7 @@ The PoC is performed locally on the developer's machine and does not claim to be
 - **Kubernetes-cluster**: local cluster based on `k3d` (K3s in Docker).
 - **Git repository**: `https://github.com/<username>/AsciiArtify`.
 - **GitOps-system**: `Argo CD`, set in namespace `argocd`.
-- **Access to the Argo CD UI**: via `kubectl port-forward` or `https://localhost:8080`.
+- **Access to the Argo CD UI**: via `kubectl port-forward` and `https://localhost:8080`.
 
 ---
 
@@ -39,9 +39,9 @@ k3d version
 kubectl version --client
 ```
 
-## 2. Argo CD installation process
+## 2. ArgoCD installation process
 
-2.1 Create cluster:
+**2.1 Create cluster:**
 
 ```bash
 k3d cluster create argocd
@@ -52,7 +52,7 @@ Verification of the created cluster:
 kubectl cluster-info
 ```
 
-2.2 Create namespace:
+**2.2 Create namespace:**
 
 ```bash
 kubectl create namespace argocd
@@ -61,3 +61,33 @@ Verification:
 ```bash
 kubectl get ns
 ```
+
+**2.3 Run ArgoCD in container:**
+
+```bash
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
+Verification containers:
+```bash
+kubectl get pod -n argocd -w
+```
+
+**2.4 Get access to GUI interface:**
+
+```bash
+kubectl port-forward svc/argocd-server -n argocd 8080:443
+```
+
+**2.5 Get password:**
+
+```bash
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d;echo
+```
+
+**2.6 First enter:**
+
+Go to https://127.0.0.1:8080.
+ArgoCD GUI runs on port 443 (HTTPS). You must accept the self-signed certificate and continue.
+Login name: admin
+Password: step 2.5
+
