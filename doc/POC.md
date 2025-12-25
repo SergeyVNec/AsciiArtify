@@ -89,5 +89,8 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 Go to https://127.0.0.1:8080.</br>
 ArgoCD GUI runs on port 443 (HTTPS). You must accept the self-signed certificate and continue.</br>
 - Login name: admin</br>
-- Password: step 2.5
+- Password: in step 2.5
 
+## 3. Create project
+
+**3.1 **
