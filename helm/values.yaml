@@ -3,7 +3,7 @@ app:
   version: v4
   port: 80
 image:
-  name: denvasyliev/k8sdiy
+  name: sergeyvnec/k8sdiy
   tag: build-599e1af
 front:
   version: 3.0.1
