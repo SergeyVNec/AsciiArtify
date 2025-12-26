@@ -4,7 +4,7 @@ app:
   port: 80
 image:
   name: sergeyvnec/k8sdiy
-  tag: build-95bc24a
+  tag: build-518a045
 front:
   version: 3.0.1
   replicas: 1
