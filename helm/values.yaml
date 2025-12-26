@@ -4,7 +4,7 @@ app:
   port: 80
 image:
   name: sergeyvnec/k8sdiy
-  tag: build-e67b19b
+  tag: build-cfc9867
 front:
   version: 3.0.1
   replicas: 1
@@ -55,4 +55,3 @@ api-gateway:
     tag: 0.51.2
   service:
     type: NodePort
-
