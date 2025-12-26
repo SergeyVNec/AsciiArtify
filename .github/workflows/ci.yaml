@@ -17,6 +17,8 @@ jobs:
  
      - name: Checkout code
        uses: actions/checkout@v2
+       with:
+         fetch-depth: 0
  
      - name: Run linter
        run: make lint
@@ -58,6 +60,7 @@ jobs:
 #       with:
 #         push: true
 #         tags: sergeyvnec/k8sdiy:build-${{ steps.vars.outputs.sha_short }}
+
  
   cd:
     name: CD
@@ -68,6 +71,8 @@ jobs:
    
      - name: Checkout code
        uses: actions/checkout@v2
+       with:
+         fetch-depth: 0
    
      - name: Declare SHA vars to use on other actions
        id: vars
@@ -81,18 +86,22 @@ jobs:
        with: 
          cmd: yq w -i helm/values.yaml image.tag build-${{ steps.vars.outputs.sha_short }}
         
-     - name: Setup git config
+     - name: Configure git
        run: |
          git config user.name "GitHub Actions"
          git config user.email "<>"
-         git add helm/values.yaml
-         git commit -m "update code version to ${{ steps.vars.outputs.sha_short }}"
-     
-     - name: Pull latest changes before push
+
+     - name: Pull latest changes
        run: git pull --rebase origin master
+
+     - name: Commit changes
+       run: |
+         git add helm/values.yaml
+         git commit -m "update code version to ${{ steps.vars.outputs.sha_short }}" || echo "No changes to commit"
 
      - name: Push changes
        uses: ad-m/github-push-action@master
        with:
          github_token: ${{ secrets.ACTIONS_TOKEN }}
          branch: master
+
