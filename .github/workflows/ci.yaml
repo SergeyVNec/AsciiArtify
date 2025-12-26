@@ -17,6 +17,8 @@ jobs:
  
      - name: Checkout code
        uses: actions/checkout@v2
+       with:
+         fetch-depth: 0
  
      - name: Run linter
        run: make lint
@@ -68,6 +70,8 @@ jobs:
    
      - name: Checkout code
        uses: actions/checkout@v2
+       with:
+         fetch-depth: 0
    
      - name: Declare SHA vars to use on other actions
        id: vars
@@ -92,7 +96,7 @@ jobs:
      - name: Commit changes
        run: |
          git add helm/values.yaml
-         git commit -m "update code version to ${{ steps.vars.outputs.sha_short }}"
+         git commit -m "update code version to ${{ steps.vars.outputs.sha_short }}" || echo "No changes to commit"
 
      - name: Push changes
        uses: ad-m/github-push-action@master
