@@ -55,3 +55,4 @@ api-gateway:
     tag: 0.51.2
   service:
     type: LoadBalancer
+    
