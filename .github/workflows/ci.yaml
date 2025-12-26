@@ -73,6 +73,15 @@ jobs:
        uses: actions/checkout@v2
        with:
          fetch-depth: 0
+
+     - name: Configure git
+       run: |
+         git config user.name "GitHub Actions"
+         git config user.email "<>"
+
+     - name: Pull latest changes
+       run: git pull --rebase origin master
+      
    
      - name: Declare SHA vars to use on other actions
        id: vars
@@ -86,13 +95,7 @@ jobs:
        with: 
          cmd: yq w -i helm/values.yaml image.tag build-${{ steps.vars.outputs.sha_short }}
         
-     - name: Configure git
-       run: |
-         git config user.name "GitHub Actions"
-         git config user.email "<>"
-
-     - name: Pull latest changes
-       run: git pull --rebase origin master
+     
 
      - name: Commit changes
        run: |
@@ -104,4 +107,3 @@ jobs:
        with:
          github_token: ${{ secrets.ACTIONS_TOKEN }}
          branch: master
-
