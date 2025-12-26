@@ -88,6 +88,9 @@ jobs:
          git add helm/values.yaml
          git commit -m "update code version to ${{ steps.vars.outputs.sha_short }}"
      
+     - name: Pull latest changes before push
+       run: git pull --rebase origin master
+
      - name: Push changes
        uses: ad-m/github-push-action@master
        with:
