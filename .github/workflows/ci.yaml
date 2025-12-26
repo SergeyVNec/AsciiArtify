@@ -81,15 +81,18 @@ jobs:
        with: 
          cmd: yq w -i helm/values.yaml image.tag build-${{ steps.vars.outputs.sha_short }}
         
-     - name: Setup git config
+     - name: Configure git
        run: |
          git config user.name "GitHub Actions"
          git config user.email "<>"
+
+     - name: Pull latest changes
+       run: git pull --rebase origin master
+
+     - name: Commit changes
+       run: |
          git add helm/values.yaml
          git commit -m "update code version to ${{ steps.vars.outputs.sha_short }}"
-     
-     - name: Pull latest changes before push
-       run: git pull --rebase origin master
 
      - name: Push changes
        uses: ad-m/github-push-action@master
