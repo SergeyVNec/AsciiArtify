@@ -95,7 +95,7 @@ ArgoCD GUI runs on port 443 (HTTPS). You must accept the self-signed certificate
 
 **3.1 Add application**
 
-![](https://github.com/SergeyVNec/AsciiArtify/tree/main/doc/pic/step1.jpg)
+![](https://github.com/SergeyVNec/AsciiArtify/blob/main/doc/pic/step1.jpg)
 
 ![](https://github.com/SergeyVNec/AsciiArtify/tree/main/doc/pic/step1-1.jpg)
 
