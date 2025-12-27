@@ -93,16 +93,20 @@ ArgoCD GUI runs on port 443 (HTTPS). You must accept the self-signed certificate
 
 ## 3. Create project
 
-**3.1 Add application**
+**Add application**
 
+Push +NEW APP
 ![Add App](https://github.com/SergeyVNec/AsciiArtify/blob/main/doc/pic/step1.jpg)
 
+Fill form
 ![Add App](https://github.com/SergeyVNec/AsciiArtify/blob/main/doc/pic/step1-1.jpg)
 
+Fill form
 ![SYNC](https://github.com/SergeyVNec/AsciiArtify/blob/main/doc/pic/step1-2.jpg)
 
+Make +SYNC
 ![SYNC](https://github.com/SergeyVNec/AsciiArtify/blob/main/doc/pic/step1-3.jpg)
 
+And waiting
 ![](https://github.com/SergeyVNec/AsciiArtify/blob/main/doc/pic/step1-4.jpg)
 
-**3.2 Add application**
