@@ -101,12 +101,20 @@ Push +NEW APP
 Fill form
 ![Add App](https://github.com/SergeyVNec/AsciiArtify/blob/main/doc/pic/step1-1.jpg)
 
-Fill form
+Make +SYNC
 ![SYNC](https://github.com/SergeyVNec/AsciiArtify/blob/main/doc/pic/step1-2.jpg)
 
-Make +SYNC
+And waiting
 ![SYNC](https://github.com/SergeyVNec/AsciiArtify/blob/main/doc/pic/step1-3.jpg)
 
-And waiting
 ![](https://github.com/SergeyVNec/AsciiArtify/blob/main/doc/pic/step1-4.jpg)
 
+
+## 4. Make port-forward for application
+
+![](https://github.com/SergeyVNec/AsciiArtify/blob/main/doc/pic/step2.jpg)
+
+
+## 5. Let's check the application's operation
+
+![](https://github.com/SergeyVNec/AsciiArtify/blob/main/doc/pic/step3.jpg)
