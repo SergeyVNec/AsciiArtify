@@ -118,3 +118,7 @@ And waiting
 ## 5. Let's check the application's operation
 
 ![](https://github.com/SergeyVNec/AsciiArtify/blob/main/doc/pic/step3.jpg)
+
+## 6. Short Video
+
+[![](https://github.com/SergeyVNec/AsciiArtify/blob/main/doc/pic/NewTux.png)](https://youtu.be/8gttMH9s7DY)
