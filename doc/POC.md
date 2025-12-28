@@ -121,4 +121,4 @@ And waiting
 
 ## 6. Short Video
 
-[![](https://github.com/SergeyVNec/AsciiArtify/blob/main/doc/pic/NewTux.png)](https://youtu.be/8gttMH9s7DY)
+[![Demo ArgoCD](https://img.youtube.com/vi/8gttMH9s7DY/hqdefault.jpg)](https://youtu.be/8gttMH9s7DY)
