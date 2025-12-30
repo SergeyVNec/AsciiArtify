@@ -9,7 +9,7 @@ This document describes the deployment of the **AsciiArtify MVP** application us
 ```
 ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
 │   Git Repository │────▶│     ArgoCD      │────▶│   Kubernetes    │
-│  (go-demo-app)  │     │  (GitOps CD)    │     │    Cluster      │
+│  (AsciiArtify)  │     │  (GitOps CD)    │     │    Cluster      │
 └─────────────────┘     └─────────────────┘     └─────────────────┘
                               │                        │
                               ▼                        ▼
@@ -34,15 +34,7 @@ This document describes the deployment of the **AsciiArtify MVP** application us
 
 ## Deployment Steps
 
-### 1. Create Namespace
-
-```bash
-kubectl create namespace demo
-```
-
-### 2. Create ArgoCD Application
-
-#### Option A: Via ArgoCD UI
+### 1. Create ArgoCD Application
 
 1. Open ArgoCD UI at `https://localhost:8080`
 2. Click **+ NEW APP**
@@ -53,7 +45,8 @@ kubectl create namespace demo
 | Application Name | `demo` |
 | Project | `default` |
 | Sync Policy | `Automatic` |
-| Repository URL | `https://github.com/den-vasyliev/go-demo-app` |
+| AUTO-CREATE NAMESPACE | `check` |
+| Repository URL | `https://github.com/SergeyVNec/AsciiArtify` |
 | Revision | `HEAD` |
 | Path | `helm` |
 | Cluster URL | `https://kubernetes.default.svc` |
@@ -65,37 +58,8 @@ kubectl create namespace demo
 
 5. Click **CREATE**
 
-#### Option B: Via YAML Manifest
 
-```yaml
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: demo
-  namespace: argocd
-spec:
-  project: default
-  source:
-    repoURL: https://github.com/den-vasyliev/go-demo-app
-    targetRevision: HEAD
-    path: helm
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: demo
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
-```
-
-Apply with:
-```bash
-kubectl apply -f demo-application.yaml
-```
-
-### 3. Verify Deployment
+### 2. Verify Deployment
 
 ```bash
 # Check ArgoCD application status
@@ -120,7 +84,7 @@ demo-img-xxx              1/1     Running   0          5m
 demo-nats-xxx             3/3     Running   0          5m
 ```
 
-### 4. Access the Application
+### 3. Access the Application
 
 ```bash
 # Port-forward to Ambassador service
@@ -134,16 +98,6 @@ kubectl port-forward -n demo svc/ambassador 8088:80
 ```bash
 # Using curl (replace with your image path)
 curl -F 'image=@/path/to/your/image.png' localhost:8088/img/
-```
-
-### Example with wget
-
-```bash
-# Download a test image
-wget -O test.png https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
-
-# Convert to ASCII
-curl -F 'image=@test.png' localhost:8088/img/
 ```
 
 ## Auto-Sync Demonstration
@@ -214,7 +168,7 @@ argocd app sync demo --force
 
 ### Application Demo
 
-[![AsciiArtify Demo](https://img.youtube.com/vi/YOUR_VIDEO_ID/hqdefault.jpg)](https://youtu.be/YOUR_VIDEO_ID)
+[![AsciiArtify Demo](https://img.youtube.com/vi/RJ26N8V9uSU/hqdefault.jpg)](https://youtu.be/RJ26N8V9uSU)
 
 ▶️ *Click on the image to watch the demo*
 
@@ -237,10 +191,10 @@ argocd app sync demo --force
 | Self-Heal | ✅ Enabled |
 | Application | ✅ Deployed |
 
-The MVP is now deployed using GitOps approach. Any changes pushed to the `go-demo-app` repository will be automatically synchronized to the Kubernetes cluster.
+The MVP is now deployed using GitOps approach. Any changes pushed to the `AsciiArtify` repository will be automatically synchronized to the Kubernetes cluster.
 
 ## References
 
 - [ArgoCD Documentation](https://argo-cd.readthedocs.io/)
-- [go-demo-app Repository](https://github.com/den-vasyliev/go-demo-app)
+- [AsciiArtify Repository](https://github.com/SergeyVNec/AsciiArtify)
 - [k3d Documentation](https://k3d.io/)
