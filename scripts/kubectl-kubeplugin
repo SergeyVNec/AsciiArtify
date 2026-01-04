@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# kubectl plugin to get resource usage statistics
+# Usage: kubectl kubeplugin <resource_type> [namespace]
+# Example: kubectl kubeplugin pod kube-system
+
+# Define command-line arguments
+RESOURCE_TYPE=${1:-pod}
+NAMESPACE=${2:-default}
+
+# Validate arguments
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+    echo "Usage: kubectl kubeplugin <resource_type> [namespace]"
+    echo ""
+    echo "Arguments:"
+    echo "  resource_type   Type of resource: pod or node (default: pod)"
+    echo "  namespace       Kubernetes namespace (default: default)"
+    echo ""
+    echo "Examples:"
+    echo "  kubectl kubeplugin pod kube-system"
+    echo "  kubectl kubeplugin node"
+    exit 0
+fi
+
+# Retrieve resource usage statistics from Kubernetes
+kubectl top $RESOURCE_TYPE -n $NAMESPACE 2>/dev/null | tail -n +2 | while read line
+do
+  # Extract CPU and memory usage from the output
+  NAME=$(echo $line | awk '{print $1}')
+  CPU=$(echo $line | awk '{print $2}')
+  MEMORY=$(echo $line | awk '{print $3}')
+
+  # Output the statistics to the console
+  echo "$RESOURCE_TYPE, $NAMESPACE, $NAME, $CPU, $MEMORY"
+done
